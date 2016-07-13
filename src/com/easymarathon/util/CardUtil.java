@@ -14,7 +14,7 @@ public class CardUtil
 	public static String curpath;
 	private static Random rand;
 
-	private native static boolean init(String path);
+	private native static int init(String path);
 
 	private native static boolean hasCard();
 
@@ -34,22 +34,21 @@ public class CardUtil
 		try
 		{
 			System.load(curpath + System.mapLibraryName("IDCardReader"));
-			boolean isSuc = init(curpath);
-			System.out.println("cardutil dll init : " + isSuc);
+			int retcode = init(curpath);
+			System.out.println("cardutil dll init : " + retcode);
 		}
 		catch (UnsatisfiedLinkError e)
 		{
 			System.err.println("error when load library");
 			System.err.println(e.getMessage());
-			throw e;
 		}
 	}
 
 	public static boolean testHasCard()
 	{
-		// return hasCard();
-		int r = rand.nextInt(256);
-		return (r > 250);
+		return hasCard();
+		// int r = rand.nextInt(256);
+		// return (r > 250);
 	}
 
 	public static IDCard getIDCard()
