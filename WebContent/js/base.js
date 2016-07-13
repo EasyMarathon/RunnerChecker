@@ -61,6 +61,16 @@ function send(obj)
 	})
 }
 
+function sendpost(obj)
+{
+	$.ajax(
+	{
+		type : "POST",
+		url : "host",
+		data : JSON.stringify(obj)
+	});
+}
+
 function init()
 {
 	if (!window.WebSocket)
@@ -144,7 +154,7 @@ function sethead(obj, img)
 function uppic()
 {
 	var dat = canvas.toDataURL("image/png").replace("data:image/png;base64,", "");
-	send(new Action("upimg", dat));
+	sendpost(new Action("upimg", dat));
 }
 
 $('document').ready(function()
@@ -155,7 +165,7 @@ $('document').ready(function()
 	var cvctx = canvas.getContext("2d");
 	$('#uppic').click(function()
 	{
-		cvctx.drawImage($("#headimg")[0], 0, 0, 160, 160);
+		cvctx.drawImage($("#headimg")[0], 0, 0, 640, 480);
 		uppic();
 	});
 	$('#trycard').click(function()

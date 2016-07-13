@@ -24,6 +24,11 @@ public class HostService
 		WSHost.BroadCast(new OpData("idcard", "no card"));
 	}
 
+	private static void onUpImg()
+	{
+		WSHost.BroadCast(new OpData("msg", "received upload image"));
+	}
+
 	public static OpData act(OpData op)
 	{
 		OpData ret = null;
@@ -48,7 +53,8 @@ public class HostService
 		case "upimg":
 			System.out.println("receive the upload image");
 			MainService.uploadHead(Base64.getDecoder().decode(op.getMsg()));
-			break;
+			onUpImg();
+			return null;
 		case "validate":
 			System.out.println("receive the upload image");
 			boolean onValid = MainService.validate(Base64.getDecoder().decode(op.getMsg()));
