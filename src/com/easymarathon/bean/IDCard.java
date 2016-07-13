@@ -44,12 +44,12 @@ public class IDCard
 		this.gender = gender;
 	}
 
-	public byte[] getImg()
+	public byte[] _getImg()
 	{
 		return img;
 	}
 
-	public void setImg(byte[] img)
+	public void _setImg(byte[] img)
 	{
 		this.img = img;
 		head = Base64.getEncoder().encodeToString(img);

@@ -42,7 +42,7 @@ public class HostService
 			{
 				byte[] dat = new byte[fis.available()];
 				fis.read(dat);
-				idCard.setImg(dat);
+				idCard._setImg(dat);
 			}
 			catch (IOException e)
 			{
