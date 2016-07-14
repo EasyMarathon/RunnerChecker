@@ -39,7 +39,6 @@ function ws_open()
 	ws.onerror = function(event)
 	{
 		console.log("Server Errored!");
-		setTimeout(ws_open, 1000);
 	};
 	return;
 }
@@ -103,6 +102,7 @@ function main(op)
 		{
 			var idcard = JSON.parse(op.datmap.idcard);
 			sethead($("#headimg"), idcard.head);
+			alert("name="+idcard.name+",\nid="+idcard.id);
 		}
 		else
 		{

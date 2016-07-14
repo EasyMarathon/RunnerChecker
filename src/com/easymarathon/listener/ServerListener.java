@@ -29,24 +29,23 @@ public class ServerListener implements ServletContextListener, Runnable
 	public void run()
 	{
 		System.out.println("ID listener started");
+		boolean hasCard = false;
 		while (isRun)
 		{
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(hasCard ? 3000 : 1000);// wait more time when has card previously
 			}
 			catch (InterruptedException e)
 			{
 				e.printStackTrace();
 			}
-			if (CardUtil.testHasCard())
+			boolean newState = CardUtil.testHasCard();
+			if (hasCard != newState)
 			{
 				HostService.onGetCard(CardUtil.getIDCard());
 			}
-			else
-			{
-				// HostService.onNoCard();
-			}
+			hasCard = newState;
 		}
 		System.out.println("ID listener stopped");
 	}

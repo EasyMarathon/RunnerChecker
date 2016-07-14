@@ -1,8 +1,5 @@
 package com.easymarathon.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Base64;
 
 import com.alibaba.fastjson.JSON;
@@ -37,17 +34,7 @@ public class HostService
 		case "init":
 			return new OpData("log", "received");
 		case "getcard":
-			IDCard idCard = new IDCard();
-			try (FileInputStream fis = new FileInputStream(new File(CardUtil.curpath + "temp.jpg")))
-			{
-				byte[] dat = new byte[fis.available()];
-				fis.read(dat);
-				idCard._setImg(dat);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			IDCard idCard = CardUtil.getIDCard();
 			onGetCard(idCard);
 			return null;
 		case "upimg":
