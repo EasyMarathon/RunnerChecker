@@ -17,6 +17,8 @@ public class CardUtil
 
 	private native static int init(String path);
 
+	private native static boolean exit();
+
 	private native static boolean hasCard();
 
 	private native static byte[][] readCard();
@@ -35,14 +37,23 @@ public class CardUtil
 		try
 		{
 			System.load(curpath + System.mapLibraryName("IDCardReader"));
-			int retcode = init(curpath);
-			System.out.println("cardutil dll init : " + retcode);
 		}
 		catch (UnsatisfiedLinkError e)
 		{
 			System.err.println("error when load library");
 			System.err.println(e.getMessage());
 		}
+	}
+
+	public static void onInit()
+	{
+		int retcode = init(curpath);
+		System.out.println("cardutil dll init : " + retcode);
+	}
+
+	public static void onExit()
+	{
+		exit();
 	}
 
 	public static boolean testHasCard()

@@ -28,34 +28,31 @@ public class ServerListener implements ServletContextListener, Runnable
 
 	public void run()
 	{
-		System.out.println("ID listener started");
+		System.out.println("IDCard listener started");
 		boolean hasCard = false;
 		while (isRun)
 		{
-			try
-			{
-				Thread.sleep(hasCard ? 3000 : 1000);// wait more time when has card previously
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
 			boolean newState = CardUtil.testHasCard();
 			if (hasCard != newState)
 			{
 				HostService.onGetCard(CardUtil.getIDCard());
 			}
 			hasCard = newState;
+			try
+			{
+				Thread.sleep(hasCard ? 3000 : 1000);// wait more time when has card previously
+			}
+			catch (InterruptedException e)
+			{
+				if (isRun)
+					e.printStackTrace();
+			}
 		}
-		System.out.println("ID listener stopped");
-	}
-
-	/**
-	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
-	 */
-	public void contextDestroyed(ServletContextEvent arg0)
-	{
-		isRun = false;
+		System.out.println("IDCard listener stopped");
+		synchronized (this)
+		{
+			this.notifyAll();
+		}
 	}
 
 	/**
@@ -64,7 +61,28 @@ public class ServerListener implements ServletContextListener, Runnable
 	public void contextInitialized(ServletContextEvent arg0)
 	{
 		isRun = true;
+		CardUtil.onInit();
 		listener.start();
 	}
 
+	/**
+	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
+	 */
+	public void contextDestroyed(ServletContextEvent arg0)
+	{
+		isRun = false;
+		CardUtil.onExit();
+		synchronized (this)
+		{
+			listener.interrupt();
+			try
+			{
+				this.wait();
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 }
