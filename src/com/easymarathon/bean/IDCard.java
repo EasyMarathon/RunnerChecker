@@ -1,6 +1,6 @@
 package com.easymarathon.bean;
 
-import java.util.Base64;
+import com.easymarathon.util.Base64Util;
 
 public class IDCard
 {
@@ -52,7 +52,7 @@ public class IDCard
 	public void _setImg(byte[] img)
 	{
 		this.img = img;
-		head = Base64.getEncoder().encodeToString(img);
+		head = Base64Util.encode(img);
 	}
 
 	public String getHead()
@@ -63,7 +63,7 @@ public class IDCard
 	public void setHead(String head)
 	{
 		this.head = head;
-		img = Base64.getDecoder().decode(head);
+		img = Base64Util.decode(head);
 	}
 
 }

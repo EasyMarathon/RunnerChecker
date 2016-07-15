@@ -102,7 +102,7 @@ function main(op)
 		{
 			var idcard = JSON.parse(op.datmap.idcard);
 			var runner = JSON.parse(op.datmap.athlete);
-			if(onHasCard)
+			if(typeof onHasCard === "function")
 			{
 				onHasCard(idcard, runner);
 			}
@@ -114,9 +114,9 @@ function main(op)
 		}
 		else
 		{
-			if(onNoCard)
+			if(typeof onNoCard === "function")
 			{
-				onNoCard(idcard, runner);
+				onNoCard();
 			}
 			else
 			{

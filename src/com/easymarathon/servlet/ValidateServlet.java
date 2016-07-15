@@ -20,10 +20,6 @@ public class ValidateServlet extends HttpServlet
 {
 	private static final long serialVersionUID = -6526716361604924521L;
 
-	public ValidateServlet()
-	{
-	}
-
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{

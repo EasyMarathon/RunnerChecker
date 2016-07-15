@@ -1,7 +1,5 @@
 package com.easymarathon.service;
 
-import java.util.Base64;
-
 import com.alibaba.fastjson.JSON;
 import com.easymarathon.bean.IDCard;
 import com.easymarathon.bean.OpData;
@@ -13,6 +11,11 @@ public class HostService
 {
 	public static void onGetCard(IDCard idCard)
 	{
+		if (idCard == null)
+		{
+			onNoCard();
+			return;
+		}
 		// IDCard data
 		OpData ret = new OpData("idcard", "get card").add("idcard", JSON.toJSONString(idCard));
 		// athlete data
@@ -57,22 +60,19 @@ public class HostService
 		case "getcard":
 			IDCard idCard = CardUtil.getIDCard();
 			onGetCard(idCard);
-			return null;
+			break;
 		case "upimg":
 			System.out.println("receive the upload image");
-		{
 			String sid = op.get("id");
 			if (sid != null)
 				id = Integer.parseInt(sid);
-		}
-			img = Base64.getDecoder().decode(op.getMsg());
+			img = Base64Util.decode(op.getMsg());
 			String res = MainService.uploadHead(img, id);
 			onUpImg(res);
-			return null;
+			break;
 		case "validate":
 			System.out.println("receive the upload image");
-			img = Base64.getDecoder().decode(op.getMsg());
-			// id = ;
+			img = Base64Util.decode(op.getMsg());
 			return onValidate(MainService.validate(img));
 		default:
 			break;

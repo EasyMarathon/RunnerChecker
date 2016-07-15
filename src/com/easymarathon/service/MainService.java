@@ -40,7 +40,7 @@ public class MainService
 	 * 
 	 * @param img
 	 *            拍摄的图像数据
-	 * @return 返回运动员号码，-1表示验证不通过
+	 * @return 返回运动员号码，0表示不存在此运动员，返回号码牌的负数表示验证不通过
 	 */
 	public static int validate(byte[] img)
 	{

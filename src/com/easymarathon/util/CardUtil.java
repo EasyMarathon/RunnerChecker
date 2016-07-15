@@ -67,7 +67,7 @@ public class CardUtil
 		if (rets == null)
 		{
 			System.out.println("noCard");
-			return idCard;
+			return null;
 		}
 		System.out.println("readCard");
 		try
