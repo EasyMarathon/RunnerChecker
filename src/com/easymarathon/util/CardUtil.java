@@ -1,5 +1,8 @@
 package com.easymarathon.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,7 +36,7 @@ public class CardUtil
 		rand = new Random();
 		try
 		{
-			System.load(curpath + System.mapLibraryName("IDCardReader"));
+			//System.load(curpath + System.mapLibraryName("IDCardReader"));
 		}
 		catch (UnsatisfiedLinkError e)
 		{
@@ -44,30 +47,44 @@ public class CardUtil
 
 	public static void onInit()
 	{
-		int retcode = init(curpath);
-		System.out.println("cardutil dll init : " + retcode);
+		/*int retcode = init(curpath);*/
+		/*System.out.println("cardutil dll init : " + retcode);*/
 	}
 
 	public static void onExit()
 	{
-		exit();
+		/*exit();*/
 	}
 
 	public static boolean testHasCard()
 	{
-		return hasCard();
-		// int r = rand.nextInt(256);
-		// return (r > 250);
+		//return hasCard();
+		 int r = rand.nextInt(256);
+		 return (r > 250);
 	}
 
 	public static IDCard getIDCard()
 	{
 		IDCard idCard = new IDCard();
-		byte[][] rets = readCard();
+		byte[][] rets = null;//readCard();
 		if (rets == null)
 		{
 			System.out.println("noCard");
-			return null;
+			try (FileInputStream fis = new FileInputStream(new File(CardUtil.curpath + "temp.jpg")))
+			{
+				byte[] dat = new byte[fis.available()];
+				fis.read(dat);
+				idCard._setImg(dat);
+				idCard.setName("¸ð´Ô´Ô");
+				idCard.setId("3303241995010101011");
+				idCard.setGender(true);
+			}
+			
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			return idCard;
 		}
 		System.out.println("readCard");
 		try
@@ -75,12 +92,13 @@ public class CardUtil
 			idCard.setName(new String(rets[0], "UTF-16LE"));
 			idCard.setId(new String(rets[1], "UTF-16LE"));
 			idCard.setGender(new String(rets[2], "UTF-16LE").equals("ÄÐ"));
+			
 		}
 		catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();
 		}
-		idCard._setImg(rets[3]);
+		
 		return idCard;
 	}
 
