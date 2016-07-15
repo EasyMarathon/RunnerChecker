@@ -101,12 +101,27 @@ function main(op)
 		if(op.datmap.idcard)// has card
 		{
 			var idcard = JSON.parse(op.datmap.idcard);
-			sethead($("#headimg"), idcard.head);
-			alert("name="+idcard.name+",\nid="+idcard.id);
+			var runner = JSON.parse(op.datmap.athlete);
+			if(onHasCard)
+			{
+				onHasCard(idcard, runner);
+			}
+			else
+			{
+				sethead($("#headimg"), idcard.head);
+				alert("name="+idcard.name+",\nid="+idcard.id);
+			}
 		}
 		else
 		{
-			sethead($("#headimg"), "");
+			if(onNoCard)
+			{
+				onNoCard(idcard, runner);
+			}
+			else
+			{
+				sethead($("#headimg"), "");
+			}
 		}
 		break;
 	case "result":

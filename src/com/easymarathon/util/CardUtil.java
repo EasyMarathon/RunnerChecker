@@ -1,8 +1,5 @@
 package com.easymarathon.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -70,16 +67,6 @@ public class CardUtil
 		if (rets == null)
 		{
 			System.out.println("noCard");
-			try (FileInputStream fis = new FileInputStream(new File(curpath + "temp.jpg")))
-			{
-				byte[] dat = new byte[fis.available()];
-				fis.read(dat);
-				idCard._setImg(dat);
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
 			return idCard;
 		}
 		System.out.println("readCard");
