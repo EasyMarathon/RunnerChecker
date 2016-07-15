@@ -30,8 +30,32 @@ function main(op)
 		alert(op.msg);
 		break;
 	case "result":
-		alert(op.msg ? "验证通过" : "验证不通过");
-		sethead($("#previmg"), op.datmap.head);
+		var isFindAthlete = op.datmap.hasOwnProperty("athlete");
+		var runner = isFindAthlete ? JSON.parse(op.datmap.athlete) : {};
+		if(op.msg)
+		{
+			if(typeof onPass === "function")
+			{
+				onPass(runner, op.datmap.head);
+			}
+			else
+			{
+				alert("验证通过");
+				sethead($("#previmg"), op.datmap.head);
+			}
+		}
+		else
+		{
+			if(typeof onUnPass === "function")
+			{
+				onUnPass(isFindAthlete, runner, op.datmap.head);
+			}
+			else
+			{
+				alert("验证不通过");
+				sethead($("#previmg"), op.datmap.head);
+			}
+		}
 		break;
 	default:
 		console.log("unknown response");

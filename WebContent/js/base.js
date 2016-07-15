@@ -169,7 +169,7 @@ function sethead(obj, img)
 function uppic()
 {
 	var dat = canvas.toDataURL("image/png").replace("data:image/png;base64,", "");
-	sendpost(new Action("upimg", dat));
+	sendpost(new Action("upimg", dat).addData("id", 1));
 }
 
 $('document').ready(function()

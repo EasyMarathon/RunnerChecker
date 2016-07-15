@@ -35,12 +35,10 @@ public class HostService
 
 	private static OpData onValidate(int id)
 	{
-		OpData ret;
-		if (id == -1)
-			ret = new OpData("result", "false");
-		else
+		OpData ret = new OpData("result", id > 0 ? "true" : "false");
+		if (id != 0)// identify the athlete, but not pass validation
 		{
-			ret = new OpData("result", "true");
+			id = Math.abs(id);
 			// athlete data
 			ret.add("athlete", JSON.toJSONString(MainService.getAthleteData(id)));
 			// last day head img
