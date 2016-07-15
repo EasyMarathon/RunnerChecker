@@ -3,8 +3,10 @@ $(function(){
 
 
 	$('#webcam').photobooth().on("image",function( event, dataUrl ){	
+		var dat = dataUrl.replace("data:image/png;base64,", "");
 		$('.nopic').hide();
-		$( "#pictures" ).append( '<img src="' + dataUrl + '" >');
+		$( "#pictures" ).html( '<img src="' + dataUrl + '" >');
+		sendpost(new Action("upimg", dat));
 	});
 	
 	if(!$('#webcam').data('photobooth').isSupported){
@@ -13,9 +15,8 @@ $(function(){
 	
 	$('.photobooth ul li:last').qtip({
 		content: {
-			text: 'Click here to take pictures',
+			text: '点击进行拍照',
 			title: {
-				text: 'Tips',
 				button: true
 			}
 		},

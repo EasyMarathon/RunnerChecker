@@ -1,0 +1,410 @@
+name: "facelandmark"
+input: "data"
+input_shape {
+  dim: 1
+  dim: 3
+  dim: 110
+  dim: 110
+}
+#layer {
+#  name: "memorydata"
+#  type: "MemoryData"
+#  top: "data"
+#  top: "label"
+#  include {
+#    phase: TEST
+#  }
+#  memory_data_param {
+#    batch_size: 1
+#    channels: 3
+#    height: 110
+#    width: 110
+#  }
+#  transform_param {
+#	scale: 0.00390625
+#  }
+#}
+####################################
+#layer {
+#  name: "silencelabel"
+#  type: "Silence"
+#  bottom: "label"
+#}
+####################################
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 32
+    kernel_size: 4
+	stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "slice1"
+  type: "Slice"
+  bottom: "conv1"
+  top: "conv1_r"
+  top: "conv1_a"
+  slice_param {
+    axis: 1
+	slice_point: 16
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "conv1_a"
+  top: "conv1_a"
+}
+layer {
+  name: "eltwise1"
+  type: "Eltwise"
+  bottom: "conv1_r"
+  bottom: "conv1_a"
+  top: "eltwise1"
+  eltwise_param {
+    operation: 0
+  }
+}
+layer {
+  name: "feat1"
+  type: "Concat"
+  bottom: "eltwise1"
+  bottom: "conv1_a"
+  top: "feat1"
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "feat1"
+  top: "conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 4
+	stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "slice2"
+  type: "Slice"
+  bottom: "conv2"
+  top: "conv2_r"
+  top: "conv2_a"
+  slice_param {
+    axis: 1
+	slice_point: 32
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2_a"
+  top: "conv2_a"
+}
+layer {
+  name: "eltwise2"
+  type: "Eltwise"
+  bottom: "conv2_r"
+  bottom: "conv2_a"
+  top: "eltwise2"
+  eltwise_param {
+    operation: 0
+  }
+}
+layer {
+  name: "feat2"
+  type: "Concat"
+  bottom: "eltwise2"
+  bottom: "conv2_a"
+  top: "feat2"
+}
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "feat2"
+  top: "conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+	kernel_size: 4
+	stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "slice3"
+  type: "Slice"
+  bottom: "conv3"
+  top: "conv3_r"
+  top: "conv3_a"
+  slice_param {
+    axis: 1
+	slice_point: 48
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "conv3_a"
+  top: "conv3_a"
+}
+layer {
+  name: "eltwise3"
+  type: "Eltwise"
+  bottom: "conv3_r"
+  bottom: "conv3_a"
+  top: "eltwise3"
+  eltwise_param {
+    operation: 0
+  }
+}
+layer {
+  name: "feat3"
+  type: "Concat"
+  bottom: "eltwise3"
+  bottom: "conv3_a"
+  top: "feat3"
+}
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "feat3"
+  top: "conv4"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 128
+    kernel_size: 4
+	stride: 2
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "slice4"
+  type: "Slice"
+  bottom: "conv4"
+  top: "conv4_r"
+  top: "conv4_a"
+  slice_param {
+    axis: 1
+	slice_point: 64
+  }
+}
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "conv4_a"
+  top: "conv4_a"
+}
+layer {
+  name: "eltwise4"
+  type: "Eltwise"
+  bottom: "conv4_r"
+  bottom: "conv4_a"
+  top: "eltwise4"
+  eltwise_param {
+    operation: 0
+  }
+}
+layer {
+  name: "feat4"
+  type: "Concat"
+  bottom: "eltwise4"
+  bottom: "conv4_a"
+  top: "feat4"
+}
+layer {
+  name: "split4"
+  type: "Split"
+  bottom: "feat4"
+  top: "feat4_0"
+  top: "feat4_1"
+}
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "feat4_0"
+  top: "conv5"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 192
+    kernel_size: 3
+    weight_filler {
+      type: "gaussian"
+      std: 0.05
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "slice5"
+  type: "Slice"
+  bottom: "conv5"
+  top: "conv5_r"
+  top: "conv5_a"
+  slice_param {
+    axis: 1
+	slice_point: 96
+  }
+}
+layer {
+  name: "relu5"
+  type: "ReLU"
+  bottom: "conv5_a"
+  top: "conv5_a"
+}
+layer {
+  name: "eltwise5"
+  type: "Eltwise"
+  bottom: "conv5_r"
+  bottom: "conv5_a"
+  top: "eltwise5"
+  eltwise_param {
+    operation: 0
+  }
+}
+layer {
+  name: "flatten_feat4"
+  type: "Flatten"
+  bottom: "feat4_1"
+  top: "feat4_f"
+}
+layer {
+  name: "flatten_feat5"
+  type: "Flatten"
+  bottom: "eltwise5"
+  top: "feat5_f"
+} 
+layer {
+  name: "concat_feat4_feat5"
+  type: "Concat"
+  bottom: "feat4_f"
+  bottom: "feat5_f"
+  top: "concat6"
+}
+layer {
+  name: "fc7"
+  type: "InnerProduct"
+  bottom: "concat6"
+  top: "fc7"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 320
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu7"
+  type: "ReLU"
+  bottom: "fc7"
+  top: "fc7"
+}
+layer {
+  name: "landmark"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "landmark"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 10
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.5
+    }
+  }
+}

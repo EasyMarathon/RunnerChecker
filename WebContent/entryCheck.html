@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- BOOTSTRAP STYLES-->
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+<!-- FONTAWESOME STYLES-->
+<link href="bootstrap/css/font-awesome.css" rel="stylesheet" />
+<!--CUSTOM BASIC STYLES-->
+<link href="bootstrap/css/basic.css" rel="stylesheet" />
+<!--CUSTOM MAIN STYLES-->
+<link href="bootstrap/css/custom.css" rel="stylesheet" />
+<meta name="author" content="terry - gbin1.com">
+<meta name="description" content="HTML5 webcam demo">
+<meta name="keywords" content="HTML5,webcam,gbin1.com, gbin1, gbtags">
+<!-- <link href='http://fonts.googleapis.com/css?family=Revalia' rel='stylesheet' type='text/css'> -->
+<link rel="stylesheet" href="webcam/css/jquery.qtip.css" type="text/css" media="screen">
+<script type="text/javascript" src="webcam/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="webcam/js/photobooth_min.js"></script>
+<script type="text/javascript" src="webcam/js/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="webcam/js/gbin1.js"></script>
+<style>
+
+			#main article{
+				margin-bottom: 50px;
+				background: #F8F8F8;
+				border-radius: 5px;
+				padding:20px;
+				border: 1px solid #bbb;
+			}
+			
+			#main #webcam{
+				height:auto !important;
+				min-height: 500px;
+				width: 100%;
+			}
+			
+			#main img{
+				background: #F8F8F8;
+				border-radius: 5px;
+				box-shadow: 0px 0px 3px #888;
+				width:100%;
+			}			
+			
+			.clear{
+				clear:both;
+			}
+			
+			#main ul{
+				list-style:none;
+				margin:0;
+				padding:0;
+			}
+			
+			#main .photobooth{
+				border: 1px solid #ccc;
+				border-radius: 5px;
+			}
+		
+</style>
+<title>检录-身份验证</title>
+</head>
+<body style="font-family:Microsoft JhengHei;">
+
+<div id="wrapper">
+	<div id="page-wrapper">
+		<div id="page-inner">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-head-line">检录</h1>
+					<h1 class="page-subhead-line">Tip:&nbsp;请运动员站在指定位置，进行拍摄；拍摄完毕后，点击照片进行身份认证</h1>
+				</div>
+			</div><!-- /. ROW  -->
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row pad-top-botm ">
+			            <div class="col-lg-6 col-md-6 col-sm-6 ">
+							<section id="main">
+								<div id="webcam"></div>
+								<div class="clear"></div>
+							</section>
+			            </div>
+		          		<div class="col-lg-6 col-md-6 col-sm-6">
+			                <section id="main">
+		          				<div id="pictures" data-toggle="modal" data-target="#myModal"><!-- 拍摄结果 -->
+		          					<img src="default_head.jpg" style="width:500px">
+								</div>
+							</section>
+		         		</div>
+	     			</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="page-subhead-line"></h1>
+					<h2 style="font-size:20px;font-weight: 600;color:#34495E"></h2>
+				</div>
+			</div><!-- /. ROW  -->
+		</div>
+	</div>
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog" style="height:80%;width:80%">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               照片匹配结果
+            </h4>
+         </div>
+         <div class="modal-body">
+         	<div class="row">
+				<div class="col-md-6">
+					<h4 style="color:#f8641d;font-size:16px;text-align:center; margin-left:auto; margin-right:auto;">检录时所拍摄的照片</h4>
+					<img src="left.jpg" style="width:100%;border-radius:3px;box-shadow: 0px 0px 3px #888;">
+				</div>
+				<div class="col-md-6">
+					<h4 style="color:#f8641d;font-size:16px;text-align:center; margin-left:auto; margin-right:auto;">领物资包时所拍摄的照片</h4>
+					<img src="left.jpg" style="width:100%;border-radius:3px;box-shadow: 0px 0px 3px #888;">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style="font-size:19px;margin-top:20px;margin-left:10px">
+			    	<strong style="font-size:25px">选手信息</strong>
+			                <br/>
+								姓名：abc
+					    	<br/>
+								性别：女
+					    	<br/>
+								号码牌：3011
+							<br/>
+								血型：A
+							<br/>
+								联系方式：15700082322	
+							<br/>
+								紧急联系人：王五
+							<br/>
+								紧急联系人电话：10086
+							<br/>
+				</div>
+			</div><!-- /. ROW  -->
+         </div>
+      </div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="bootstrap/js/bootstrap.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="bootstrap/js/jquery.metisMenu.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="bootstrap/js/custom.js"></script>
+</body>
+</html>

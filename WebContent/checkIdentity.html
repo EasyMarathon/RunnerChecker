@@ -14,18 +14,13 @@
 <meta name="author" content="terry - gbin1.com">
 <meta name="description" content="HTML5 webcam demo">
 <meta name="keywords" content="HTML5,webcam,gbin1.com, gbin1, gbtags">
-<link href='http://fonts.googleapis.com/css?family=Revalia' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Revalia' rel='stylesheet' type='text/css'> -->
 <link rel="stylesheet" href="webcam/css/jquery.qtip.css" type="text/css" media="screen">
 <script type="text/javascript" src="webcam/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="webcam/js/photobooth_min.js"></script>
 <script type="text/javascript" src="webcam/js/jquery.qtip.min.js"></script>
 <script type="text/javascript" src="webcam/js/gbin1.js"></script>
 <style>
-			div#pictures,div#webcam{
-				margin: 10px 0 0;
-			}
-			
-
 			#main article{
 				margin-bottom: 50px;
 				background: #F8F8F8;
@@ -35,15 +30,16 @@
 			}
 			
 			#main #webcam{
-				height: 460px;
+				height:auto !important;
+				min-height: 500px;
 				width: 100%;
 			}
 			
 			#main img{
-				margin-bottom: 50px;
 				background: #F8F8F8;
-				border-radius: 10px;
-				box-shadow: 0px 0px 5px #888;
+				border-radius: 5px;
+				box-shadow: 0px 0px 3px #888;
+				width:100%;
 			}			
 			
 			.clear{
@@ -87,7 +83,8 @@
 			            </div>
 		          		<div class="col-lg-6 col-md-6 col-sm-6">
 			                <section id="main">
-		          				<div id="pictures"><!-- 拍摄结果 -->
+		          				<div id="pictures" data-toggle="modal" data-target="#myModal"><!-- 拍摄结果 -->
+		          					<img src="default_head.jpg" style="width:500px">
 								</div>
 							</section>
 		         		</div>
