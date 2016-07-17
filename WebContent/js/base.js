@@ -5,7 +5,7 @@
 var ws;
 var ws_url;
 var isCam = false;
-
+var runner;
 function ws_wait(callback)
 {
 	console.log("here wait");
@@ -95,13 +95,13 @@ function main(op)
 		console.log("GET:%s", op.msg);
 		break;
 	case "msg":
-		alert(op.msg);
+		//alert(op.msg);
 		break;
 	case "idcard":
 		if(op.datmap.idcard)// has card
 		{
 			var idcard = JSON.parse(op.datmap.idcard);
-			var runner = JSON.parse(op.datmap.athlete);
+			runner = JSON.parse(op.datmap.athlete);
 			if(typeof onHasCard === "function")
 			{
 				onHasCard(idcard, runner);
@@ -109,7 +109,6 @@ function main(op)
 			else
 			{
 				sethead($("#headimg"), idcard.head);
-				alert("name="+idcard.name+",\nid="+idcard.id);
 			}
 		}
 		else

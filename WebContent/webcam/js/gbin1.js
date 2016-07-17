@@ -1,12 +1,21 @@
 $(function(){
 
-
-
-	$('#webcam').photobooth().on("image",function( event, dataUrl ){	
-		var dat = dataUrl.replace("data:image/png;base64,", "");
+	$('#webcam').photobooth().on("image",function( event, dataUrl ){
+		predata = dataUrl.replace("data:image/png;base64,", "");
 		$('.nopic').hide();
-		$( "#pictures" ).html( '<img src="' + dataUrl + '" >');
-		sendpost(new Action("upimg", dat));
+		$( "#pictures" ).html( '<img id="currentimg" src="' + dataUrl + '" >');
+		//alert("athleteID:"+runner.athleteID);
+		sendpost(new Action("upimg", predata).addData("athleteID", runner.athleteID));
+	});
+	
+	$('#webcam1').photobooth().on("image",function( event, dataUrl ){
+		predata = dataUrl.replace("data:image/png;base64,", "");
+		$('.nopic').hide();
+		$( "#pictures" ).html( '<img id="currentimg" src="' + dataUrl + '" >');
+		//alert("athleteID:"+runner.athleteID);
+		//sendpost(new Action("upimg", predata).addData("id", runner.athleteID));
+		send(new Action("validate", predata));
+		
 	});
 	
 	if(!$('#webcam').data('photobooth').isSupported){

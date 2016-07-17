@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<c3p0-config>
+  <default-config>
+    <property name="user">dbuser</property>
+    <property name="password">dbpassword</property>
+    <property name="driverClass">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+    <property name="jdbcUrl">jdbc:sqlserver://120.27.106.188:9433;DatabaseName=EasyMarathon</property>
+ 
+    <property name="initialPoolSize">3</property>
+    <property name="maxIdleTime">30</property>
+    <property name="maxPoolSize">20</property>
+    <property name="minPoolSize">3</property>
+    <property name="maxStatements">200</property>
+  </default-config>
+</c3p0-config>

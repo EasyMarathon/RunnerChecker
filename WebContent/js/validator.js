@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+var predata;
 function send(obj)
 {
 	$.ajax(
@@ -32,6 +32,7 @@ function main(op)
 	case "result":
 		var isFindAthlete = op.datmap.hasOwnProperty("athlete");
 		var runner = isFindAthlete ? JSON.parse(op.datmap.athlete) : {};
+		//alert(runner.athleteID);
 		if(op.msg)
 		{
 			if(typeof onPass === "function")
@@ -41,6 +42,7 @@ function main(op)
 			else
 			{
 				alert("验证通过");
+				onPass(runner, op.datmap.head);
 				sethead($("#previmg"), op.datmap.head);
 			}
 		}
@@ -91,12 +93,11 @@ function uppic()
 	send(new Action("upimg", dat));
 }
 
-$('document').ready(function()
+/*$('document').ready(function()
 {
 	var cvctx = canvas.getContext("2d");
 	$('#validate').click(function()
 	{
-		var dat = canvas.toDataURL("image/png").replace("data:image/png;base64,", "");
-		send(new Action("validate", dat));
+		send(new Action("validate", predata));
 	});
-});
+});*/

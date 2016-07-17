@@ -4,9 +4,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
+import com.easymarathon.dao.AthleteDao;
+import com.easymarathon.dao.DaoBase;
+import com.easymarathon.bean.Athlete;
 import com.easymarathon.bean.IDCard;
-import com.easymarathon.util.CardUtil;
+import com.easymarathon.util.NumIdentify;
+
+import com.easymarathon.util.Facerecognition;
+import com.easymarathon.util.CameraUtil;
+import com.easymarathon.util.FaceAlignment;
 
 public class MainService
 {
@@ -22,18 +31,34 @@ public class MainService
 	 */
 	public static String uploadHead(byte[] img, int id)
 	{
+		String fname="G:\\face\\athleteCheck\\initial\\" + id + ".jpg";
+		System.out.println(fname);
 		try (FileOutputStream fos = new FileOutputStream(
-				new File("D:\\" + System.currentTimeMillis() + ".png")))
+				new File(fname)))
 		{
 			fos.write(img);
-			return "";
 		}
 		catch (IOException e)
 		{
 			System.err.println(e.getMessage());
 		}
+		String dname="G:\\face\\athleteCheck\\alignment\\" + id;
+		System.out.println(dname);
+		FaceAlignment ni = new FaceAlignment();
+		System.out.println("run dll");
+		try{
+			int ans = ni.cutface(fname, dname);
+			System.out.println("ans:"+ans);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
+	
+	
 
 	/**
 	 * 检录阶段，当工作人员拍摄完照片，照片被上传进行验证时的操作逻辑
@@ -45,16 +70,26 @@ public class MainService
 	public static int validate(byte[] img)
 	{
 		try (FileOutputStream fos = new FileOutputStream(
-				new File("D:\\" + System.currentTimeMillis() + ".png")))
+				new File("G:\\face\\athleteCheck\\temp.jpg")))
 		{
 			fos.write(img);
-			return 10086;
+			
 		}
 		catch (IOException e)
 		{
 			System.err.println(e.getMessage());
 		}
-		return -1;
+		NumIdentify ni = new NumIdentify();
+		int ans = ni.GetID("G:\\face\\athleteCheck\\temp.jpg");
+		//int ans=2345;
+		System.out.println(ans);
+		CameraUtil cameraUtil =new CameraUtil();
+		int ss=cameraUtil.compare(ans);
+		System.out.println(ss);
+		if(ss<50000)
+		   return ans;
+		else
+			return -1;
 	}
 
 	/**
@@ -66,7 +101,7 @@ public class MainService
 	 */
 	public static byte[] getHeadImg(int id)
 	{
-		try (FileInputStream fis = new FileInputStream(new File(CardUtil.curpath + "temp.jpg")))
+		try (FileInputStream fis = new FileInputStream(new File("G:\\face\\athleteCheck\\initial\\" + id + "-0.jpg")))
 		{
 			byte[] dat = new byte[fis.available()];
 			fis.read(dat);
@@ -88,7 +123,20 @@ public class MainService
 	 */
 	public static Object getAthleteData(int id)
 	{
-		return "under construction";
+		Connection conn = DaoBase.getConnection(true);
+		AthleteDao athleteDao = new AthleteDao(conn);
+		Athlete athlete=new Athlete();
+		try{
+			athlete=athleteDao.GetAthletebyAthleteID(id);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally{
+			DaoBase.close(conn, null, null);
+		}
+		return athlete;
 	}
 
 	/**
@@ -97,10 +145,25 @@ public class MainService
 	 * @param idCard
 	 *            识别到的身份证信息
 	 * @return 返回运动员信息，null为找不到此运动员
+	 * @throws SQLException 
 	 */
-	public static Object getAthleteData(IDCard idCard)
+	public static Object getAthleteData(IDCard idCard) 
 	{
-		return "under construction";
+		String id=idCard.getId();
+		Connection conn = DaoBase.getConnection(true);
+		AthleteDao athleteDao = new AthleteDao(conn);
+		Athlete athlete=null;
+		try{
+			athlete=athleteDao.GetAthletebyID(id);
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally{
+			DaoBase.close(conn, null, null);
+		}
+		return athlete;
 	}
 
 }

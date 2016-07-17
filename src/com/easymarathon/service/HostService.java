@@ -19,7 +19,10 @@ public class HostService
 		// IDCard data
 		OpData ret = new OpData("idcard", "get card").add("idcard", JSON.toJSONString(idCard));
 		// athlete data
-		ret.add("athlete", JSON.toJSONString(MainService.getAthleteData(idCard)));
+		System.out.println("haha:"+MainService.getAthleteData(idCard));
+		String result =JSON.toJSONString(MainService.getAthleteData(idCard));
+		ret.add("athlete", result);
+		System.out.println(result);
 		WSHost.BroadCast(ret);
 	}
 
@@ -36,6 +39,7 @@ public class HostService
 	private static OpData onValidate(int id)
 	{
 		OpData ret = new OpData("result", id > 0 ? "true" : "false");
+		System.out.println("id:"+id);
 		if (id != 0)// identify the athlete, but not pass validation
 		{
 			id = Math.abs(id);
@@ -61,7 +65,8 @@ public class HostService
 			break;
 		case "upimg":
 			System.out.println("receive the upload image");
-			String sid = op.get("id");
+			String sid = op.get("athleteID");
+			System.out.println(sid);
 			if (sid != null)
 				id = Integer.parseInt(sid);
 			img = Base64Util.decode(op.getMsg());
@@ -69,7 +74,7 @@ public class HostService
 			onUpImg(res);
 			break;
 		case "validate":
-			System.out.println("receive the upload image");
+			System.out.println("validate");
 			img = Base64Util.decode(op.getMsg());
 			return onValidate(MainService.validate(img));
 		default:

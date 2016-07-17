@@ -61,7 +61,7 @@
 <title>身份验证</title>
 </head>
 <body style="font-family:Microsoft JhengHei;">
-
+<button id="trycard" style="display:none">读取card</button>
 <div id="wrapper">
 	<div id="page-wrapper">
 		<div id="page-inner">
@@ -101,40 +101,40 @@
 			
 			<div class="row">
 				<div class="col-md-12">
-					<div class="row pad-top-botm ">
-			            <div class="col-lg-6 col-md-6 col-sm-6 ">
-			            	<strong style="font-size:18px">报名信息</strong>
-			                <br/>
-								姓名：abc
+					<div class="row pad-top-botm" style="margin-left:2px">
+			            <div class="col-lg-6 col-md-6 col-sm-6"  style="font-size:19px;">
+			            	<strong style="font-size:20px">报名信息</strong>
+			            	<div id="runnerData">
+								姓名：
 					    	<br/>
-								性别：女
+								性别：
 					    	<br/>
-								号码牌：3011
+								号码牌：
 							<br/>
-								血型：A
+								血型：
 							<br/>
-								联系方式：15700082322	
+								联系方式：
 							<br/>
-								紧急联系人：王五
+								紧急联系人：
 							<br/>
-								紧急联系人电话：10086
+								紧急联系人电话：
 							<br/>
-								住址：浙江省杭州市西湖区留下街道288号
-							<br/>
-							<button id="trycard" type="button" class="btn btn-success" style="font-size:18sp;margin-top:20px;margin-bottom:10px">验证通过</button>
-							<button id="trycard" type="button" class="btn btn-danger" style="font-size:18sp;margin-top:20px;margin-bottom:10px">验证失败</button>
-			            
-			            </div>
-		          		<div class="col-lg-6 col-md-6 col-sm-6">
-		          			<strong style="font-size:18px">身份证信息</strong>
-			                <br/>
-								姓名：abc
-			                <br/>
-								性别：女
-			                <br/>
-								身份证号：33032419950212212
-							<br/>
-				        </div>
+								住址：
+							</div>
+						</div>
+		          		<div class="col-lg-6 col-md-6 col-sm-6" style="font-size:19px">
+		          			<strong style="font-size:20px">身份证信息</strong>
+		          			<br/>
+		          				<img id="headimg" src="default_head.jpg" style="margin-top:5px;margin-bottom:5px;height:120px;border-radius:2px">
+			                <div id="IDCardContent">
+									姓名：
+				                <br/>
+									性别：
+				                <br/>
+									身份证号：
+								<br/>
+							</div>
+						</div>
 			     	</div>
 				</div>
 			</div><!-- /. ROW  -->
@@ -148,5 +148,7 @@
 <script src="bootstrap/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="bootstrap/js/custom.js"></script>
+<script src="js/base.js"></script>
+<script src="webcam/js/checkidentity.js"></script>
 </body>
 </html>
