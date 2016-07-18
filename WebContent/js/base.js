@@ -5,7 +5,7 @@
 var ws;
 var ws_url;
 var isCam = false;
-var runner;
+
 function ws_wait(callback)
 {
 	console.log("here wait");
@@ -101,7 +101,7 @@ function main(op)
 		if(op.datmap.idcard)// has card
 		{
 			var idcard = JSON.parse(op.datmap.idcard);
-			runner = JSON.parse(op.datmap.athlete);
+			var runner = op.datmap.athlete ? JSON.parse(op.datmap.athlete) : undefined;
 			if(typeof onHasCard === "function")
 			{
 				onHasCard(idcard, runner);

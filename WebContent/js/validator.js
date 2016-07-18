@@ -41,7 +41,6 @@ function main(op)
 			}
 			else
 			{
-				alert("验证通过");
 				onPass(runner, op.datmap.head);
 				sethead($("#previmg"), op.datmap.head);
 			}
@@ -54,7 +53,6 @@ function main(op)
 			}
 			else
 			{
-				alert("验证不通过");
 				sethead($("#previmg"), op.datmap.head);
 			}
 		}

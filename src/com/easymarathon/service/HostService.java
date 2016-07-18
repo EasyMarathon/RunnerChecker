@@ -19,10 +19,9 @@ public class HostService
 		// IDCard data
 		OpData ret = new OpData("idcard", "get card").add("idcard", JSON.toJSONString(idCard));
 		// athlete data
-		System.out.println("haha:"+MainService.getAthleteData(idCard));
-		String result =JSON.toJSONString(MainService.getAthleteData(idCard));
-		ret.add("athlete", result);
-		System.out.println(result);
+		Object runner = MainService.getAthleteData(idCard);
+		if (runner != null)
+			ret.add("athlete", JSON.toJSONString(runner));
 		WSHost.BroadCast(ret);
 	}
 

@@ -1,3 +1,4 @@
+var runner;
 function onHasCard(idcard, runner){
 	sethead($("#headimg"), idcard.head);
 	var sex;
