@@ -10,6 +10,7 @@ public class Athlete {
 	private Integer athleteID=null;
 	private String  address="";
 	private String blood="";
+	private String identityPic="";
 
 	
 	public String getName() {
@@ -71,5 +72,17 @@ public class Athlete {
 	}
 	public void setBlood(String blood) {
 		this.blood = blood;
+	}
+	public String getiDcard() {
+		return iDcard;
+	}
+	public void setiDcard(String iDcard) {
+		this.iDcard = iDcard;
+	}
+	public String getIdentityPic() {
+		return identityPic;
+	}
+	public void setIdentityPic(String identityPic) {
+		this.identityPic = identityPic;
 	}
 }

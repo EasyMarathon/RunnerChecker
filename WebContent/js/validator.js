@@ -1,7 +1,6 @@
 /**
  * 
  */
-var predata;
 function send(obj)
 {
 	$.ajax(
@@ -33,15 +32,16 @@ function main(op)
 		var isFindAthlete = op.datmap.hasOwnProperty("athlete");
 		var runner = isFindAthlete ? JSON.parse(op.datmap.athlete) : {};
 		//alert(runner.athleteID);
-		if(op.msg)
+		if(op.msg=="true")
 		{
 			if(typeof onPass === "function")
 			{
+				//alert("onPass");
 				onPass(runner, op.datmap.head);
 			}
 			else
 			{
-				onPass(runner, op.datmap.head);
+				//onPass(runner, op.datmap.head);
 				sethead($("#previmg"), op.datmap.head);
 			}
 		}
@@ -49,6 +49,7 @@ function main(op)
 		{
 			if(typeof onUnPass === "function")
 			{
+				//alert("onUnPass");
 				onUnPass(isFindAthlete, runner, op.datmap.head);
 			}
 			else

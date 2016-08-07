@@ -36,6 +36,7 @@ public class AthleteDao {
 				athlete.setUrgencyPhone(rs1.getString("UrgencyPhone"));
 				System.out.println(athlete.getIDcard());
 				athlete.setBlood(rs1.getString("Blood"));
+				athlete.setIdentityPic(rs1.getString("IdentityPic"));
 				return athlete;	
 				
 			}
@@ -61,6 +62,7 @@ public class AthleteDao {
 				athlete.setUrgencyName(rs1.getString("UrgencyName"));
 				athlete.setUrgencyPhone(rs1.getString("UrgencyPhone"));
 				athlete.setBlood(rs1.getString("Blood"));
+				athlete.setIdentityPic(rs1.getString("IdentityPic"));
 			}
 			return athlete;	
 		}
@@ -82,6 +84,7 @@ public class AthleteDao {
 				athlete.setUrgencyName(rs1.getString("UrgencyName"));
 				athlete.setUrgencyPhone(rs1.getString("UrgencyPhone"));
 				athlete.setBlood(rs1.getString("Blood"));
+				athlete.setIdentityPic(rs1.getString("IdentityPic"));
 				dataList.add(athlete);
 			}
 			return dataList;

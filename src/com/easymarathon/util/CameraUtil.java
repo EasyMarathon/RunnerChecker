@@ -145,7 +145,7 @@ public class CameraUtil {
 			  FileWriter fileWritter = new FileWriter(file);
 		      int pname = athleteID;
 			  String data=pname+"-0.jpg "+1+"\r\n";
-			  System.out.println("’’∆¨∫≈£∫"+String.valueOf(i));
+			  System.out.println("’’∆¨∫≈£∫"+data);
 			  System.out.println(data);
 			  fileWritter.write(data);			 
 			  data="temp-0.jpg"+" "+0;

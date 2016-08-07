@@ -39,7 +39,7 @@ public class HostService
 	{
 		OpData ret = new OpData("result", id > 0 ? "true" : "false");
 		System.out.println("id:"+id);
-		if (id != 0)// identify the athlete, but not pass validation
+		if (id >0)// identify the athlete, but not pass validation
 		{
 			id = Math.abs(id);
 			// athlete data

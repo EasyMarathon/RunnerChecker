@@ -4,8 +4,9 @@ $(function(){
 		predata = dataUrl.replace("data:image/png;base64,", "");
 		$('.nopic').hide();
 		$( "#pictures" ).html( '<img id="currentimg" src="' + dataUrl + '" >');
-		//alert("athleteID:"+runner.athleteID);
-		sendpost(new Action("upimg", predata).addData("athleteID", runner.athleteID));
+		//alert("拍摄完成！");
+		sendpost(new Action("upimg", predata).addData("athleteID", athlete.athleteID));
+		alert("拍摄完成！");
 	});
 	
 	$('#webcam1').photobooth().on("image",function( event, dataUrl ){

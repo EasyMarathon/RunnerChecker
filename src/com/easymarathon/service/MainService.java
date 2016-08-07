@@ -80,15 +80,19 @@ public class MainService
 			System.err.println(e.getMessage());
 		}
 		NumIdentify ni = new NumIdentify();
-		int ans = ni.GetID("G:\\face\\athleteCheck\\temp.jpg");
-		//int ans=2345;
-		System.out.println(ans);
+		//int ans = ni.GetID("G:\\face\\athleteCheck\\temp.jpg");
+		int ans=2345;
+		System.out.println("ans:"+ans);
 		CameraUtil cameraUtil =new CameraUtil();
-		int ss=cameraUtil.compare(ans);
-		System.out.println(ss);
+		//int ss=cameraUtil.compare(ans);
+		int ss=1000;
+		System.out.println("比对结果："+ss);
 		if(ss<50000)
+		{
+			
 		   return ans;
-		else
+		}
+		   else
 			return -1;
 	}
 
@@ -101,7 +105,7 @@ public class MainService
 	 */
 	public static byte[] getHeadImg(int id)
 	{
-		try (FileInputStream fis = new FileInputStream(new File("G:\\face\\athleteCheck\\initial\\" + id + "-0.jpg")))
+		try (FileInputStream fis = new FileInputStream(new File("G:\\face\\athleteCheck\\initial\\" + id + ".jpg")))
 		{
 			byte[] dat = new byte[fis.available()];
 			fis.read(dat);
